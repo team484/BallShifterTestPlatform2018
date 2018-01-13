@@ -56,7 +56,7 @@ public class DriveSS extends Subsystem {
 	    		setShifterMode(ShifterMode.HIGH);
 	    		break;
 	    	case HIGH:
-	    		setShifterMode(ShifterMode.LOW);
+	    		setShifterMode(ShifterMode.AUTO);
 	    		break;
 	    	default:
 	    		break;

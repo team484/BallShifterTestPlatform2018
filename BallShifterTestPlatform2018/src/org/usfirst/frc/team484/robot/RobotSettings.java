@@ -19,7 +19,7 @@ public class RobotSettings {
 	public static final boolean INVERT_RIGHT_MOTORS = false;
 	
 	//the speed of the robot (in inches per second) that the threshold for shifting occurs
-	public static final double SHIFTING_SPEED = 70;
+	public static final double SHIFTING_SPEED = 50;
 	//the speed past the set shifting speed the robot must go before it shifts
 	public static final double SHIFTING_DEADBAND = 2;
 	
@@ -35,8 +35,8 @@ public class RobotSettings {
 	public static final int RIGHT_ENCODER_A_CHANNEL = 2;
 	public static final int RIGHT_ENCODER_B_CHANNEL = 3;
 	
-	public static final int SHIFTER_SOLENOID_LOW_GEAR_PORT = 0;
-	public static final int SHIFTER_SOLENOID_HIGH_GEAR_PORT = 1;
+	public static final int SHIFTER_SOLENOID_LOW_GEAR_PORT = 1;
+	public static final int SHIFTER_SOLENOID_HIGH_GEAR_PORT = 0;
 	
 	public static final int DRIVE_STICK_PORT = 0;
 }
