@@ -10,6 +10,8 @@ package org.usfirst.frc.team484.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.team484.api.motion.ShifterDrive.ShifterMode;
 import org.usfirst.frc.team484.robot.subsystems.DriveSS;
 
 /**
@@ -28,6 +30,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		robotIO = new RobotIO();
+		RobotIO.drive.setShifterMode(ShifterMode.LOW);
 		m_oi = new OI();
 		setPeriod(0.01);
 	}

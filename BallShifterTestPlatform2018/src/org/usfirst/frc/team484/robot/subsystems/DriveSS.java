@@ -24,7 +24,7 @@ public class DriveSS extends Subsystem {
 	     * @param rot - The rate the robot should turn [-1.0 to 1.0]
 	     */
 	    public void driveSquaredInputs(double y, double rot) {
-	    	RobotIO.drive.arcadeDrive(-y, rot);
+	    	RobotIO.drive.arcadeDrive(y, rot);
 	    }
 	    
 	    /**
@@ -56,7 +56,7 @@ public class DriveSS extends Subsystem {
 	    		setShifterMode(ShifterMode.HIGH);
 	    		break;
 	    	case HIGH:
-	    		setShifterMode(ShifterMode.AUTO);
+	    		setShifterMode(ShifterMode.LOW);
 	    		break;
 	    	default:
 	    		break;

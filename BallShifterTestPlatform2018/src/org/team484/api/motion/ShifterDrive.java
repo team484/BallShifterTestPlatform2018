@@ -217,9 +217,10 @@ public class ShifterDrive {
 		if (Math.abs(System.currentTimeMillis() - lastShiftTime) < shiftingWaitTime) {
 			return;
 		}
-		lastShiftTime = System.currentTimeMillis();
 		leftShifterEncoder.getShifterSolenoid().shiftToHigh();
 		rightShifterEncoder.getShifterSolenoid().shiftToHigh();
+		if (!isInLowGear) return;
+		lastShiftTime = System.currentTimeMillis();
 		isInLowGear = false;
 	}
 	
@@ -230,9 +231,10 @@ public class ShifterDrive {
 		if (Math.abs(System.currentTimeMillis() - lastShiftTime) < shiftingWaitTime) {
 			return;
 		}
-		lastShiftTime = System.currentTimeMillis();
 		leftShifterEncoder.getShifterSolenoid().shiftToLow();
 		rightShifterEncoder.getShifterSolenoid().shiftToLow();
+		if (isInLowGear) return;
+		lastShiftTime = System.currentTimeMillis();
 		isInLowGear = true;
 	}
 	

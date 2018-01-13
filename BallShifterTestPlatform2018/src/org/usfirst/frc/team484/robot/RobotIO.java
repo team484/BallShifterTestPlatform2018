@@ -34,8 +34,10 @@ public class RobotIO {
 		for (int i : RobotSettings.RIGHT_DRIVE_MOTOR_IDS) {
 			rightTalons.add(new WPI_TalonSRX(i));
 		}
-		leftMotors = new SpeedControllerGroup((WPI_TalonSRX[])leftTalons.toArray());
-		rightMotors = new SpeedControllerGroup((WPI_TalonSRX[])rightTalons.toArray());
+		WPI_TalonSRX[] leftTals = new WPI_TalonSRX[] {leftTalons.get(0), leftTalons.get(1), leftTalons.get(2)};
+		WPI_TalonSRX[] rightTals = new WPI_TalonSRX[] {rightTalons.get(0), rightTalons.get(1), rightTalons.get(2)};
+		leftMotors = new SpeedControllerGroup(leftTals);
+		rightMotors = new SpeedControllerGroup(rightTals);
 		
 		shifterSolenoid = new ShifterSolenoid(RobotSettings.SHIFTER_SOLENOID_LOW_GEAR_PORT,
 				RobotSettings.SHIFTER_SOLENOID_HIGH_GEAR_PORT);
