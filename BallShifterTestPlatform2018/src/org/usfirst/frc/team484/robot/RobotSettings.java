@@ -27,8 +27,8 @@ public class RobotSettings {
 	public static final int SHIFTER_MODE_SWITCH_BUTTON = 1;
 	
 	//-----Ports everything is plugged into----
-	public static final int[] LEFT_DRIVE_MOTOR_IDS = {4,5,6};
-	public static final int[] RIGHT_DRIVE_MOTOR_IDS = {1,2,3};
+	public static final int[] LEFT_DRIVE_MOTOR_IDS = {1,2,3};
+	public static final int[] RIGHT_DRIVE_MOTOR_IDS = {4,5,6};
 	
 	public static final int LEFT_ENCODER_A_CHANNEL = 0;
 	public static final int LEFT_ENCODER_B_CHANNEL = 1;
