@@ -35,6 +35,9 @@ public class RobotSettings {
 	public static final int RIGHT_ENCODER_A_CHANNEL = 2;
 	public static final int RIGHT_ENCODER_B_CHANNEL = 3;
 	
+	public static final int TOP_GYRO_CHANNEL = 0;
+	public static final int BOTTOM_GYRO_CHANNEL = 1;
+	
 	public static final int SHIFTER_SOLENOID_LOW_GEAR_PORT = 1;
 	public static final int SHIFTER_SOLENOID_HIGH_GEAR_PORT = 0;
 	
