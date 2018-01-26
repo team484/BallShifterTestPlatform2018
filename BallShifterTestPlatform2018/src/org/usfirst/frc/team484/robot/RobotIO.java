@@ -10,6 +10,7 @@ import org.team484.api.sensor.ShifterEncoder;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class RobotIO {
@@ -20,6 +21,9 @@ public class RobotIO {
 
 	public static ShifterEncoder leftEncoder;
 	public static ShifterEncoder rightEncoder;
+	
+	public static AnalogGyro topGyro;
+	public static AnalogGyro bottomGyro;
 	
 	public static ShifterDrive drive;
 	
@@ -46,6 +50,9 @@ public class RobotIO {
 				false, RobotSettings.ENCODER_ENCODING_TYPE, shifterSolenoid);
 		rightEncoder = new ShifterEncoder(RobotSettings.RIGHT_ENCODER_A_CHANNEL, RobotSettings.RIGHT_ENCODER_B_CHANNEL,
 				false, RobotSettings.ENCODER_ENCODING_TYPE, shifterSolenoid);
+		
+		topGyro = new AnalogGyro(RobotSettings.TOP_GYRO_CHANNEL);
+		bottomGyro = new AnalogGyro(RobotSettings.BOTTOM_GYRO_CHANNEL);
 		
 		drive = new ShifterDrive(leftMotors, rightMotors, leftEncoder, rightEncoder);
 				

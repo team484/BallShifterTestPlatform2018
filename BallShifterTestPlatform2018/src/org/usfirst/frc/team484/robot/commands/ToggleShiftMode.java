@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleShiftMode extends Command {
 
     public ToggleShiftMode() {
-        requires(Robot.kdriveSS);
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		Robot.kdriveSS.toggleShiftingMode();
+    	Robot.drive.toggleShiftingMode();
     }
 
     // Make this return true when this Command no longer needs to run execute()

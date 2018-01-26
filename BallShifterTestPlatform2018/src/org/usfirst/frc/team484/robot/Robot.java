@@ -9,7 +9,6 @@ package org.usfirst.frc.team484.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team484.api.motion.ShifterDrive.ShifterMode;
@@ -23,16 +22,18 @@ import org.usfirst.frc.team484.robot.subsystems.DriveSS;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final DriveSS kdriveSS
+	public static final DriveSS drive
 			= new DriveSS();
 	public static RobotIO robotIO;
-	public static OI m_oi;
+	public static OI oi;
+	public static GameField field;
 
 	@Override
 	public void robotInit() {
 		robotIO = new RobotIO();
 		RobotIO.drive.setShifterMode(ShifterMode.LOW);
-		m_oi = new OI();
+		oi = new OI();
+		field = GameField.getField();
 		setPeriod(0.01);
 	}
 

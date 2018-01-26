@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveWithJoystick extends Command {
 
     public DriveWithJoystick() {
-        requires(Robot.kdriveSS);
+        requires(Robot.drive);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
-    		Robot.kdriveSS.driveSquaredInputs(-RobotIO.driveJoystick.getY(), RobotIO.driveJoystick.getX());
+    	Robot.drive.driveSquaredInputs(-RobotIO.driveJoystick.getY(), RobotIO.driveJoystick.getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -27,6 +27,6 @@ public class DriveWithJoystick extends Command {
     // Called once after isFinished returns true
     @Override
 	protected void end() {
-    	Robot.kdriveSS.doNothing();
+    	Robot.drive.doNothing();
     }
 }
