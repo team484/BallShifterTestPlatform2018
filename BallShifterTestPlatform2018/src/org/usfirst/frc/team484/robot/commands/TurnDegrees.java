@@ -20,8 +20,7 @@ public class TurnDegrees extends PIDCommand {
     	requires(Robot.drive);
     	
     	// Clear the gyros so 45 degrees to the right is actually 45 degrees to the right
-    	RobotIO.topGyro.reset();
-    	RobotIO.bottomGyro.reset();
+    	RobotIO.gyro.reset();
     	
     	getPIDController().setPercentTolerance(2);
     	setSetpoint(degrees);
@@ -31,7 +30,7 @@ public class TurnDegrees extends PIDCommand {
 	protected double returnPIDInput() {
 		// Wrap the continuous angles around so they're always between 0 and 360, so we don't spin multiple times
 		// trying to get to zero
-		return (RobotIO.topGyro.getAngle() % 360 - RobotIO.bottomGyro.getAngle() % 360) / 2;
+		return RobotIO.gyro.getAngle() % 360;
 	}
 
 	@Override
