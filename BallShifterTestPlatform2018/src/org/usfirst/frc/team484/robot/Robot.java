@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team484.api.motion.ShifterDrive.ShifterMode;
+import org.team484.api.util.Localizer;
 import org.usfirst.frc.team484.robot.subsystems.DriveSS;
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		Localizer.getInstance();
 		robotIO = new RobotIO();
 		RobotIO.drive.setShifterMode(ShifterMode.LOW);
 		m_oi = new OI();
@@ -39,24 +41,20 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		logRobotState();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		logRobotState();
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		logRobotState();
 	}
 
 	@Override
 	public void testPeriodic() {
-		logRobotState();
 	}
 	
 	/**
@@ -72,5 +70,14 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Speed MPH", speed / 17.6); //Miles per Hour
 		SmartDashboard.putNumber("Left Encoder Distance", RobotIO.leftEncoder.getDistance());
 		SmartDashboard.putNumber("Right Encoder Distance", RobotIO.rightEncoder.getDistance());
+		SmartDashboard.putNumber("X Pos", Localizer.getInstance().getState().x);
+		SmartDashboard.putNumber("Y Pos", Localizer.getInstance().getState().y);
+		SmartDashboard.putNumber("Rot", Localizer.getInstance().getState().rot);
+	}
+	
+	@Override
+	public void robotPeriodic() {
+		logRobotState();
+		Localizer.getInstance().run(RobotIO.leftEncoder, RobotIO.rightEncoder, RobotIO.gyro);
 	}
 }
