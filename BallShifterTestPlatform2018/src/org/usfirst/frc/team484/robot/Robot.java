@@ -42,11 +42,11 @@ public class Robot extends TimedRobot {
 		RobotIO.drive.setShifterMode(ShifterMode.LOW);
 		
 		logger = new RobotLogger(10);
+		logger.log("Timestamp", new Timer());
 		logger.log("Left Encoder", RobotIO.leftEncoder);
 		logger.log("Right Encoder", RobotIO.rightEncoder);
 		logger.log("Left Speed Controller", RobotIO.leftMotors);
 		logger.log("Right Speed Controller", RobotIO.rightMotors);
-		logger.log("Timestamp", new Timer());
 		
 		oi = new OI();
 		field = GameField.getField();

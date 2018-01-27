@@ -123,5 +123,9 @@ public class SpeedControllerGroup implements SpeedController {
 			controller.stopMotor();
 		}
 	}
+	
+	public ArrayList<SpeedController> getControllers() {
+		return speedControllers;
+	}
 
 }

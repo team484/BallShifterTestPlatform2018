@@ -23,6 +23,8 @@ public class RobotSettings {
 	//the speed past the set shifting speed the robot must go before it shifts
 	public static final double SHIFTING_DEADBAND = 2;
 	
+	public static final double VOLTAGE_TARGET = 10.0;
+	
 	//-----Joystick button map-----
 	public static final int SHIFTER_MODE_SWITCH_BUTTON = 1;
 	

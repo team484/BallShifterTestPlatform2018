@@ -7,16 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Timer;
@@ -45,6 +46,7 @@ public class RobotLogger extends Thread {
 		JOYSTICK,
 		PDP,
 		RELAY,
+		ROBOT_CONTROLLER,
 		SOLENOID,
 		SPEED_CONTROLLER,
 		TIMER
@@ -153,7 +155,7 @@ public class RobotLogger extends Thread {
 	 * @param name - The name to give the gyro.
 	 * @param gyro - The instance of the gyro.
 	 */
-	public void log(String name, AnalogGyro gyro) {
+	public void log(String name, GyroBase gyro) {
 		addObjectToLogger(ObjectType.GYRO, gyro, name);
 	}
 	
@@ -185,6 +187,15 @@ public class RobotLogger extends Thread {
 	}
 	
 	/**
+	 * Adds a Robot Controller to the logger.
+	 * @param name - The name to give the relay.
+	 * @param controller - The instance of the controller.
+	 */
+	public void log(String name, RobotController controller) {
+		addObjectToLogger(ObjectType.ROBOT_CONTROLLER, controller, name);
+	}
+	
+	/**
 	 * Adds a solenoid to the logger.
 	 * @param name - The name to give the solenoid.
 	 * @param solenoid - The instance of the solenoid.
@@ -203,9 +214,9 @@ public class RobotLogger extends Thread {
 	}
 	
 	/**
-	 * Adds a speed controller to the logger.
+	 * Adds a timer to the logger.
 	 * @param name - The name to give the speed controller.
-	 * @param speedController - The instance of the speed controller.
+	 * @param Timer - The instance of the robot timer.
 	 */
 	public void log(String name, Timer timer) {
 		addObjectToLogger(ObjectType.TIMER, timer, name);
@@ -252,7 +263,6 @@ public class RobotLogger extends Thread {
 				Thread.sleep(Math.max(waitTime - time, 0));
 				loopStart = System.currentTimeMillis();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
 				break;
 			}
 		}
@@ -300,7 +310,7 @@ public class RobotLogger extends Thread {
 	private void writeLine(StringBuilder line) {
 		line.setLength(Math.max(line.length() - 1, 0));
 		if (writer != null) {
-			writer.write(line.toString());
+			writer.write(line.toString() + "\n");
 		}
 		line.setLength(0);
 	}
@@ -374,6 +384,11 @@ public class RobotLogger extends Thread {
 		case RELAY:
 			sb.append(loggerObject.name + ",");
 			break;
+		case ROBOT_CONTROLLER:
+			sb.append(loggerObject.name + " - current,");
+			sb.append(loggerObject.name + " - voltage,");
+			sb.append(loggerObject.name + " - brown-out,");
+		break;
 		case SOLENOID:
 			sb.append(loggerObject.name + ",");
 			break;
@@ -421,14 +436,15 @@ public class RobotLogger extends Thread {
 			sb.append(ds.isAutonomous() + ",");
 			sb.append(ds.isOperatorControl() + ",");
 			sb.append(ds.isDSAttached() + ",");
+			RobotController.isBrownedOut();
 			break;
 		case ENCODER:
 			sb.append(((Encoder) loggerObject.obj).getDistance() + ",");
 			sb.append(((Encoder) loggerObject.obj).getRate() + ",");
 			break;
 		case GYRO:
-			sb.append(((AnalogGyro) loggerObject.obj).getAngle() + ",");
-			sb.append(((AnalogGyro) loggerObject.obj).getRate() + ",");
+			sb.append(((GyroBase) loggerObject.obj).getAngle() + ",");
+			sb.append(((GyroBase) loggerObject.obj).getRate() + ",");
 			break;
 		case JOYSTICK:
 			Joystick joystick = (Joystick) loggerObject.obj;
@@ -450,6 +466,11 @@ public class RobotLogger extends Thread {
 			break;
 		case RELAY:
 			sb.append(((Relay) loggerObject.obj).get().toString() + ",");
+			break;
+		case ROBOT_CONTROLLER:
+			sb.append(RobotController.getInputCurrent() + ",");
+			sb.append(RobotController.getInputVoltage() + ",");
+			sb.append(RobotController.isBrownedOut() + ",");
 			break;
 		case SOLENOID:
 			sb.append(((Solenoid) loggerObject.obj).get() + ",");

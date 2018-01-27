@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
 
 public class RobotIO {
 	public static SpeedControllerGroup leftMotors;
@@ -73,5 +74,17 @@ public class RobotIO {
 		
 		drive.setShiftingSpeed(RobotSettings.SHIFTING_SPEED);
 		drive.setShiftingDeadband(RobotSettings.SHIFTING_DEADBAND);
+		setVoltageCompMode(true);
+	}
+	
+	public static void setVoltageCompMode(boolean shouldComp) {
+		for (SpeedController talon : leftMotors.getControllers()) {
+			((WPI_TalonSRX) talon).configVoltageCompSaturation(10.0, 10);
+			((WPI_TalonSRX) talon).enableVoltageCompensation(shouldComp);
+		}
+		for (SpeedController talon : rightMotors.getControllers()) {
+			((WPI_TalonSRX) talon).configVoltageCompSaturation(RobotSettings.VOLTAGE_TARGET, 10);
+			((WPI_TalonSRX) talon).enableVoltageCompensation(shouldComp);
+		}
 	}
 }
