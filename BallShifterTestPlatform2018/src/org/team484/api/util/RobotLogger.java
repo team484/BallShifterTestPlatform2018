@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * RobotLogger takes in various WPILIB objects and logs them periodically to a log file on a connected
@@ -45,7 +46,8 @@ public class RobotLogger extends Thread {
 		PDP,
 		RELAY,
 		SOLENOID,
-		SPEED_CONTROLLER
+		SPEED_CONTROLLER,
+		TIMER
 	}
 	
 	/**
@@ -198,6 +200,15 @@ public class RobotLogger extends Thread {
 	 */
 	public void log(String name, SpeedController speedController) {
 		addObjectToLogger(ObjectType.SPEED_CONTROLLER, speedController, name);
+	}
+	
+	/**
+	 * Adds a speed controller to the logger.
+	 * @param name - The name to give the speed controller.
+	 * @param speedController - The instance of the speed controller.
+	 */
+	public void log(String name, Timer timer) {
+		addObjectToLogger(ObjectType.TIMER, timer, name);
 	}
 	
 	/**
@@ -369,6 +380,9 @@ public class RobotLogger extends Thread {
 		case SPEED_CONTROLLER:
 			sb.append(loggerObject.name + ",");
 			break;
+		case TIMER:
+			sb.append(loggerObject.name + ",");
+			break;
 		default:
 			break;
 		}
@@ -442,6 +456,9 @@ public class RobotLogger extends Thread {
 			break;
 		case SPEED_CONTROLLER:
 			sb.append(((SpeedController) loggerObject.obj).get() + ",");
+			break;
+		case TIMER:
+			sb.append(Timer.getFPGATimestamp() + ",");
 			break;
 		default:
 			break;
