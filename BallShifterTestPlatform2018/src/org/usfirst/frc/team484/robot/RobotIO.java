@@ -29,7 +29,7 @@ public class RobotIO {
 	
 	public static Joystick driveJoystick;
 	
-	public RobotIO() {
+	public static void initialize() {
 		List<WPI_TalonSRX> leftTalons = new ArrayList<>();
 		List<WPI_TalonSRX> rightTalons = new ArrayList<>();
 		for (int i : RobotSettings.LEFT_DRIVE_MOTOR_IDS) {

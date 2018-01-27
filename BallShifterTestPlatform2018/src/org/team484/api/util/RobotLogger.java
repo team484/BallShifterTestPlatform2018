@@ -283,7 +283,7 @@ public class RobotLogger extends Thread {
 	private boolean createWriter() {
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		String fileName = FILE_NAME_PREFIX + timeStamp + FILE_EXTENSION;
-		outputFile = new File(activeSaveDirectory.getAbsolutePath() + fileName);
+		outputFile = new File(activeSaveDirectory.getAbsolutePath() + "/" + fileName);
 		try {
 			writer = new PrintWriter(outputFile);
 		} catch (FileNotFoundException e) {

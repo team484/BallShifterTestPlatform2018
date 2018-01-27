@@ -36,6 +36,7 @@ public class Localizer {
 		
 		double delta = (leftEncDelta + rightEncDelta) / 2.0;
 		
+		// change change in distance into change in the x/y components
 		double deltaX = delta * Math.cos(gyroAngle);
 		double deltaY = delta * Math.sin(gyroAngle);
 		

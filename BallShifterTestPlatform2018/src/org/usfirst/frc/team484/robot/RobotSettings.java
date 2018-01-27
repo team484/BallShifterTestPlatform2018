@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  * (Basically anything that isn't a physical port on the robot)
  */
 public class RobotSettings {
-	public static final double LEFT_ENCODER_DISTANCE_PER_PULSE = -0.03337939375 / 3.0;
-	public static final double RIGHT_ENCODER_DISTANCE_PER_PULSE = 0.03337939375 / 3.0;
+	public static final double LEFT_ENCODER_DISTANCE_PER_PULSE = 0.03337939375 / 3.0;
+	public static final double RIGHT_ENCODER_DISTANCE_PER_PULSE = -0.03337939375 / 3.0;
 	public static final double LOW_GEAR_ROTATIONS_PER_ENCODER_PULSE = 10.42/256.0/3.0;
 	public static final double HIGH_GEAR_ROTATIONS_PER_ENCODER_PULSE = 2.83/256.0/3.0;
 	public static final EncodingType ENCODER_ENCODING_TYPE = EncodingType.k1X;

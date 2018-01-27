@@ -7,13 +7,15 @@
 
 package org.usfirst.frc.team484.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.team484.api.motion.ShifterDrive.ShifterMode;
 import org.team484.api.util.Localizer;
+import org.team484.api.util.RobotLogger;
 import org.usfirst.frc.team484.robot.subsystems.DriveSS;
+
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,15 +30,43 @@ public class Robot extends TimedRobot {
 	public static RobotIO robotIO;
 	public static OI oi;
 	public static GameField field;
+	
+	private static RobotLogger logger;
 
 	@Override
 	public void robotInit() {
 		Localizer.getInstance();
-		robotIO = new RobotIO();
+		
+		RobotIO.initialize();
+		RobotIO.gyro.calibrate();
 		RobotIO.drive.setShifterMode(ShifterMode.LOW);
+		
+		logger = new RobotLogger(10);
+		logger.log("Left Encoder", RobotIO.leftEncoder);
+		logger.log("Right Encoder", RobotIO.rightEncoder);
+		logger.log("Left Speed Controller", RobotIO.leftMotors);
+		logger.log("Right Speed Controller", RobotIO.rightMotors);
+		logger.log("Timestamp", new Timer());
+		
 		oi = new OI();
 		field = GameField.getField();
 		setPeriod(0.01);
+	}
+	
+	@Override
+	public void autonomousInit() {
+		RobotIO.gyro.reset();
+	}
+	
+	@Override
+	public void teleopInit() {
+		RobotIO.gyro.reset();
+		logger.start();
+	}
+	
+	@Override
+	public void disabledInit() {
+		logger.interrupt();
 	}
 
 	@Override
@@ -52,6 +82,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+	}
+	
+	@Override
+	public void testInit() {
 	}
 
 	@Override

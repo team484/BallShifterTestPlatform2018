@@ -10,6 +10,8 @@ public class GameField {
 	
 	static GameField getField() {
 		String msg = DriverStation.getInstance().getGameSpecificMessage().toUpperCase();
+
+		if (msg.equals("")) return null;
 		GameField field = new GameField();
 		
 		field.ourSwitchLeft = msg.charAt(0) == 'L';

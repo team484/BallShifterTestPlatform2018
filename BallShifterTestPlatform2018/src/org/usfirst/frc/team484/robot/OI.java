@@ -8,6 +8,7 @@
 package org.usfirst.frc.team484.robot;
 
 
+import org.usfirst.frc.team484.robot.commands.FloorItTest;
 import org.usfirst.frc.team484.robot.commands.ToggleShiftMode;
 
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,8 +20,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	Button toggleShiftModeButton = new JoystickButton(RobotIO.driveJoystick, RobotSettings.SHIFTER_MODE_SWITCH_BUTTON);
+	Button floorItButton = new JoystickButton(RobotIO.driveJoystick, 2);
 	
 	public OI() {
 		toggleShiftModeButton.whenPressed(new ToggleShiftMode());
+		floorItButton.whenPressed(new FloorItTest(0.8, 120));
 	}
 }
